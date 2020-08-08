@@ -103,13 +103,16 @@ class MainActivity : AppCompatActivity() {
                     it.setSurfaceProvider(viewFinder.createSurfaceProvider())
                 }
 
+            imageCapture = ImageCapture.Builder()
+                .build()
+
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
                 // 何もバインドされていないことを確認後、cameraProviderをバインドする
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview
+                    this, cameraSelector, preview, imageCapture
                 )
             } catch(e: Exception) {
                 Log.e(TAG, "Use case binding failed", e)
